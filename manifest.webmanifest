@@ -1,0 +1,16 @@
+{
+  "name": "LessPass",
+  "short_name": "LessPass",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff",
+  "theme_color": "#aaa",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "1080x1080"
+    }
+  ]
+}
