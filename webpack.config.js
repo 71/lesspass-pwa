@@ -110,7 +110,10 @@ module.exports = {
       favicon: 'src/assets/logo.png',
     }),
 
-    new CopyWebpackPlugin(['src/manifest.webmanifest']),
+    new CopyWebpackPlugin([
+      'src/assets/CNAME',
+      'src/manifest.webmanifest',
+    ]),
 
     ...(DEV ? [] : [
       new WorkboxPlugin.GenerateSW(),

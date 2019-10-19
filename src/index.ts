@@ -104,7 +104,7 @@ interface Options {
   length: number
   counter: number
   aes: 256 | 384 | 512
-  iterations: number 
+  iterations: number
 }
 
 function saveOptions() {
@@ -182,7 +182,8 @@ function renderPassword() {
     generatedPassword = password
     resultElement.textContent = password
 
-    part1Element.parentElement!.style.setProperty('--box-width', `${resultElement.clientWidth + 16}px`)
+    part1Element.parentElement!.style.setProperty(
+      '--box-width', `${resultElement.clientWidth + 16}px`)
   })
 }
 
@@ -191,7 +192,7 @@ websiteElement.addEventListener('input', function() {
 
   if (this.value.length === 0)
     return part1Element.classList.add('out')
- 
+
   part1Element.classList.remove('out')
 })
 
@@ -389,7 +390,7 @@ for (const element of document.getElementsByClassName('drag-number') as any as H
           initialY = e.screenY
 
     function onMouseMove(e: MouseEvent) {
-      let multiplier = (+input.max - +input.min) / 200
+      let multiplier = (+input.max - +input.min) / 500
       let newValue = initialValue + (initialY - e.screenY) * multiplier
 
       if (newValue < +input.min)
@@ -402,7 +403,7 @@ for (const element of document.getElementsByClassName('drag-number') as any as H
     }
 
     document.addEventListener('mousemove', onMouseMove)
-    
+
     document.addEventListener('mouseup', () => {
       document.removeEventListener('mousemove', onMouseMove)
     }, { once: true })
@@ -414,7 +415,7 @@ for (const element of document.getElementsByClassName('drag-number') as any as H
           initialY = e.targetTouches[0].screenY
 
     function onTouchMove(e: TouchEvent) {
-      let multiplier = (+input.max - +input.min) / 200
+      let multiplier = (+input.max - +input.min) / 500
       let newValue = initialValue + (initialY - e.targetTouches[0].screenY) * multiplier
 
       if (newValue < +input.min)
@@ -427,7 +428,7 @@ for (const element of document.getElementsByClassName('drag-number') as any as H
     }
 
     document.addEventListener('touchmove', onTouchMove)
-    
+
     document.addEventListener('touchend', () => {
       document.removeEventListener('touchmove', onTouchMove)
     }, { once: true })
