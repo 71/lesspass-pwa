@@ -1,0 +1,43 @@
+{
+  "name": "lesspass-pwa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": {
+    "name": "Grégoire Geis",
+    "email": "git@gregoirege.is"
+  },
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/71/lesspass-pwa",
+    "type": "git"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@material/chips": "^3.2.0",
+    "@material/ripple": "^3.2.0",
+    "@material/snackbar": "^3.2.0",
+    "@material/textfield": "^3.2.0",
+    "@types/webpack": "^4.4.33",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.4",
+    "css-loader": "^3.0.0",
+    "file-loader": "^4.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "lesspass": "^9.0.0",
+    "mini-css-extract-plugin": "^0.7.0",
+    "open-color": "^1.7.0",
+    "pug": "^2.0.4",
+    "pug-loader": "^2.4.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.2",
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2",
+    "workbox-webpack-plugin": "^4.3.1"
+  }
+}

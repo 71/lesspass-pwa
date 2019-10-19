@@ -1,0 +1,230 @@
+body
+  margin: 0
+  display: flex
+  justify-content: center
+
+*
+  box-sizing: border-box
+
+input[type='number']
+  -moz-appearance: textfield
+
+  &::-webkit-inner-spin-button, &::-webkit-outer-spin-button
+    -webkit-appearance: none
+    margin: 0
+
+.mdc-chip-set
+  margin-left: -8px
+  margin-top: .4em
+  margin-bottom: -.6em
+
+  .locked
+    pointer-events: none!important
+
+.drag-number
+  pointer-events: all!important
+  touch-action: none
+  user-select: none
+  opacity: .5
+  cursor: grab
+
+.toggle-password
+  pointer-events: all!important
+  opacity: .5
+
+  .show
+    display: initial
+  .hide
+    display: none
+
+.toggle-password.is-clear
+  .show
+    display: none
+  .hide
+    display: initial
+
+section
+  max-width: 600px
+  margin: 1em
+
+  .paper
+    padding: 1em
+    border-radius: 8px
+    box-shadow: none
+    border: 1px #e0e0e0 solid
+    overflow: hidden
+    max-height: 48px
+    overflow: hidden
+    transition: all .2s ease-in-out
+
+    &.active
+      max-height: 200px
+
+  .opener
+    height: 48px
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin: -1em -1em 1em -1em
+    padding: 0 1em
+    cursor: pointer
+
+    h3
+      font: 18px Roboto, sans-serif
+      margin: 2px 2px 0 0
+      color: #252525
+
+    svg
+      height: 24px
+      width: 24px
+      margin-right: -4px
+      transform: rotate(180deg)
+      transition: transform .2s ease-in-out
+
+      path
+        fill: #5d5d5d
+
+      /.paper.active .opener svg
+        transform: rotate(0)
+
+#inputs
+  .paper
+    max-height: none
+
+  .mdc-text-field:first-of-type
+    margin-top: 0
+
+  .mdc-text-field
+    margin-top: 1em
+    width: 100%
+
+#options
+  .mdc-text-field
+    width: calc(50% - 6px)
+
+  .both-inputs
+    width: 100%
+    display: flex
+    justify-content: space-between
+
+#adv-options
+  .mdc-text-field
+    width: 100%
+
+
+#result
+  margin: 0
+  padding: 1em
+  overflow: hidden
+
+  @media (min-height: 800px)
+    margin-top: 2em
+
+.result-view
+  height: 200px
+  position: relative
+
+  $shadow-color = #cecece
+  $default-color = #f0f0f0
+
+  b, span
+    font: 800 72px Ubuntu, sans-serif
+
+  b
+    position: absolute
+    color: var(--color, $default-color)
+
+  .letter
+    text-shadow: $shadow-color 1px 2px
+    transition: all .3s ease-out
+    z-index: 1
+
+  #letter-1
+    transform: scale(1.2) rotate(24deg)
+
+    &.out
+      transform: scale(1.2) rotate(4deg) translateX(-80px)
+
+  #letter-2
+    right: .7em
+    transform: scale(.9) rotate(-40deg)
+
+    &.out
+      transform: scale(.9) rotate(-10deg) translateX(140px)
+
+  #letter-3
+    left: .8em
+    bottom: 0
+    transform: rotate(-12deg)
+
+    &.out
+      transform: rotate(-30deg) translate(-40px, 100px)
+
+  #letter-4
+    bottom: .15em
+    right: 0
+    transform: scale(1.1) rotate(10deg)
+
+    &.out
+      transform: scale(1.1) rotate(-20deg) translateX(100px)
+
+  .parts
+    position: absolute
+    width: 100%
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+
+  .part
+    position: absolute
+    opacity: .9
+    transition: all .3s ease-in
+    box-shadow: $shadow-color 1px 2px
+    height: var(--box-height)
+    width: calc(var(--box-width) / 3)
+    background: var(--color, $default-color)
+    transition: all .3s ease-in
+
+    &.focused, &:hover
+      opacity: 1
+
+  --box-radius: 6px
+  --box-height: 48px
+  --box-width: 200px
+
+  #part-1
+    margin-left: calc(0px - var(--box-width) / 3)
+
+    border-top-left-radius: var(--box-radius)
+    border-bottom-left-radius: var(--box-radius)
+
+    &.out
+      transform: translate(-40px, 40px) rotate(-60deg)
+
+  #part-2
+    &.out
+      transform: translate(10px, -80px) rotate(10deg)
+
+  #part-3
+    margin-left: calc(var(--box-width) / 3)
+
+    border-top-right-radius: var(--box-radius)
+    border-bottom-right-radius: var(--box-radius)
+
+    &.out
+      transform: rotate(-20deg) translateX(80px)
+
+  .result-container
+    display: flex
+    height: 100%
+    width: 100%
+    justify-content: center
+    align-items: center
+    cursor: pointer
+
+    span
+      font-size: 24px
+      z-index: 1
+      color: white
+      text-shadow: #999 1px 1px
