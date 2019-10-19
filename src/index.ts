@@ -499,3 +499,18 @@ function forwardVisualFocus(input: HTMLInputElement, target: HTMLElement) {
 forwardVisualFocus(websiteElement, part1Element)
 forwardVisualFocus(usernameElement, part3Element)
 forwardVisualFocus(passwordElement, part2Element)
+
+
+// Make sure focusing an element via Alt opens the relevant section
+// ============================================================================
+
+function focusOpensSection(paperElement: Element, ...focusElements: HTMLElement[]) {
+  for (const focusElement of focusElements)
+    focusElement.addEventListener('focus', () => paperElement.classList.add('active'))
+}
+
+focusOpensSection(document.querySelector('#options .paper')!,
+  lengthElement, counterElement, ...charsetsChipSet.chips.map(x => x.root_))
+
+focusOpensSection(document.querySelector('#adv-options .paper')!,
+  iterElement, ...algorithmChipSet.chips.map(x => x.root_))
