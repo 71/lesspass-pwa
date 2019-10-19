@@ -23,3 +23,10 @@ The UI is very simple, but the header is quite unique:
 
 Additionally, the password may be clicked to copy it to
 the clipboard.
+
+#### A word of caution
+
+No specific protection has been built into the app. This means that
+malicious extensions can easily know what you type in each field,
+and also what the generated password is. Do note that **no data
+is ever sent to a server**. Everything happens on-device.
