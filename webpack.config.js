@@ -116,7 +116,9 @@ module.exports = {
     ]),
 
     ...(DEV ? [] : [
-      new WorkboxPlugin.GenerateSW(),
+      new WorkboxPlugin.GenerateSW({
+        exclude: ['CNAME'],
+      }),
     ])
   ],
 }
