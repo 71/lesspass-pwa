@@ -1,6 +1,7 @@
 {
   "name": "LessPass",
   "short_name": "LessPass",
+  "categories": ["security", "utilities"],
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
@@ -10,7 +11,8 @@
     {
       "src": "/icon.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "maskable any"
     }
   ]
 }
