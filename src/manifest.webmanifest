@@ -5,12 +5,13 @@
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fff",
-  "theme_color": "#aaa",
+  "theme_color": "#fff",
   "icons": [
     {
-      "src": "/logo.png",
+      "src": "/icon.png",
       "type": "image/png",
-      "sizes": "1080x1080"
+      "sizes": "512x512",
+      "purpose": "maskable"
     }
   ]
 }

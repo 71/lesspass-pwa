@@ -107,11 +107,12 @@ module.exports = {
       chunks: ['index'],
       template: '!!pug-loader!src/index.pug',
       filename: 'index.html',
-      favicon: 'src/assets/logo.png',
+      favicon: 'src/assets/favicon.png',
     }),
 
     new CopyWebpackPlugin([
       'src/assets/CNAME',
+      'src/assets/icon.png',
       'src/manifest.webmanifest',
     ]),
 
