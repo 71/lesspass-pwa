@@ -248,7 +248,7 @@ section .opener svg path {
   cursor: pointer;
 }
 .result-view .result-container span {
-  font: 500 24px 'Ubuntu Mono', monospace;
+  font: 700 26px 'Ubuntu Mono', monospace;
   z-index: 1;
   color: #fff;
   text-shadow: #999 1px 1px;
