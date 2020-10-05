@@ -164,17 +164,17 @@ function renderPassword() {
   const token = ++generatedPasswordRaceToken
 
   generatePassword(
-    websiteElement.value,
-    usernameElement.value,
-    passwordElement.value,
     {
+      site: websiteElement.value,
+      login: usernameElement.value,
       counter: options.counter,
       length: options.length,
       lowercase: (options.charsets & Charset.Lower) !== 0,
       uppercase: (options.charsets & Charset.Upper) !== 0,
-      numbers: (options.charsets & Charset.Numeric) !== 0,
+      digits: (options.charsets & Charset.Numeric) !== 0,
       symbols: (options.charsets & Charset.Symbols) !== 0,
-    }
+    },
+    passwordElement.value,
   ).then(password => {
     if (token !== generatedPasswordRaceToken)
       return
@@ -432,7 +432,7 @@ for (const element of document.getElementsByClassName('drag-number') as any as H
     document.addEventListener('touchend', () => {
       document.removeEventListener('touchmove', onTouchMove)
     }, { once: true })
-  })
+  }, { passive: true })
 }
 
 

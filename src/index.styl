@@ -127,14 +127,12 @@ section
   $shadow-color = #cecece
   $default-color = #f0f0f0
 
-  b, span
-    font: 800 72px Ubuntu, sans-serif
-
   b
     position: absolute
     color: var(--color, $default-color)
 
   .letter
+    font: 500 72px Ubuntu, sans-serif
     text-shadow: $shadow-color 1px 2px
     transition: all .3s ease-out
     z-index: 1
@@ -194,7 +192,7 @@ section
   --box-width: 200px
 
   #part-1
-    margin-left: calc(0px - var(--box-width) / 3)
+    margin-left: calc(0px - var(--box-width) * 2 / 3)
 
     border-top-left-radius: var(--box-radius)
     border-bottom-left-radius: var(--box-radius)
@@ -207,7 +205,7 @@ section
       transform: translate(10px, -80px) rotate(10deg)
 
   #part-3
-    margin-left: calc(var(--box-width) / 3)
+    margin-left: calc(var(--box-width) * 2 / 3)
 
     border-top-right-radius: var(--box-radius)
     border-bottom-right-radius: var(--box-radius)
@@ -224,7 +222,7 @@ section
     cursor: pointer
 
     span
-      font-size: 24px
+      font: 700 26px 'Ubuntu Mono', monospace
       z-index: 1
       color: white
       text-shadow: #999 1px 1px

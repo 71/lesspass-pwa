@@ -1,14 +1,16 @@
 declare module 'lesspass' {
-  interface Profile {
+  interface PasswordGenerationOptions {
+    site: string
+    login: string
     counter: number
     length: number
     lowercase: boolean
     uppercase: boolean
-    numbers: boolean
+    digits: boolean
     symbols: boolean
   }
 
-  function generatePassword(site: string, login: string, masterPassword: string, profile: Profile): Promise<string>
+  function generatePassword(options: PasswordGenerationOptions, masterPassword: string): Promise<string>
 }
 
 declare module 'lesspass-fingerprint' {

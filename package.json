@@ -1,6 +1,6 @@
 {
   "name": "lesspass-pwa",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "index.js",
   "author": {
     "name": "Grégoire Geis",
@@ -13,7 +13,8 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --host 0.0.0.0",
-    "build": "webpack"
+    "build": "webpack",
+    "publish": "gh-pages -d dist"
   },
   "devDependencies": {
     "@material/chips": "^3.2.0",
@@ -25,6 +26,7 @@
     "copy-webpack-plugin": "^5.0.4",
     "css-loader": "^3.0.0",
     "file-loader": "^4.0.0",
+    "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^3.2.0",
     "lesspass": "^9.0.0",
     "mini-css-extract-plugin": "^0.7.0",

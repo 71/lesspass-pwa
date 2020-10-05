@@ -11,7 +11,7 @@ html(lang='en')
     meta(name='theme-color', content='#fff')
     meta(name='description', content='PWA for LessPass.')
 
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Ubuntu:500&display=swap')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&family=Ubuntu+Mono:wght@700&display=swap')
     link(rel='manifest'  , href='manifest.webmanifest')
 
   body
@@ -67,7 +67,7 @@ html(lang='en')
         block
 
     mixin paper()
-      .paper&attributes(attributes)
+      form.paper&attributes(attributes)
         block
 
     mixin opener()
@@ -96,9 +96,9 @@ html(lang='en')
 
       section#inputs
         +paper
-          +text-field('text', 'website', 'Website')(inputmode='url')
-          +text-field('text', 'username', 'Username')(inputmode='email')
-          +text-field('password', 'password', 'Master password')(autocomplete='one-time-code')
+          +text-field('text', 'website', 'Website')(inputmode='url', autocomplete='off')
+          +text-field('text', 'username', 'Username')(inputmode='email', autocomplete='off')
+          +text-field('password', 'password', 'Master password')(autocomplete='current-password')
 
       section#options
         +paper.active
