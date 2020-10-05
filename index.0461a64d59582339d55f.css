@@ -159,15 +159,12 @@ section .opener svg path {
   --box-height: 48px;
   --box-width: 200px;
 }
-.result-view b,
-.result-view span {
-  font: 800 72px Ubuntu, sans-serif;
-}
 .result-view b {
   position: absolute;
   color: var(--color, #f0f0f0);
 }
 .result-view .letter {
+  font: 500 72px Ubuntu, sans-serif;
   text-shadow: #cecece 1px 2px;
   transition: all 0.3s ease-out;
   z-index: 1;
@@ -224,7 +221,7 @@ section .opener svg path {
   opacity: 1;
 }
 .result-view #part-1 {
-  margin-left: calc(0px - var(--box-width) / 3);
+  margin-left: calc(0px - var(--box-width) * 2 / 3);
   border-top-left-radius: var(--box-radius);
   border-bottom-left-radius: var(--box-radius);
 }
@@ -235,7 +232,7 @@ section .opener svg path {
   transform: translate(10px, -80px) rotate(10deg);
 }
 .result-view #part-3 {
-  margin-left: calc(var(--box-width) / 3);
+  margin-left: calc(var(--box-width) * 2 / 3);
   border-top-right-radius: var(--box-radius);
   border-bottom-right-radius: var(--box-radius);
 }
@@ -251,7 +248,7 @@ section .opener svg path {
   cursor: pointer;
 }
 .result-view .result-container span {
-  font-size: 24px;
+  font: 500 24px 'Ubuntu Mono', monospace;
   z-index: 1;
   color: #fff;
   text-shadow: #999 1px 1px;
