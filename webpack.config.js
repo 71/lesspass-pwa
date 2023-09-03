@@ -37,7 +37,7 @@ module.exports = {
     index: './src/index.ts',
   },
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, 'dist'),
     filename: './[name].bundle.js',
     publicPath: '/',
   },
@@ -53,6 +53,9 @@ module.exports = {
         use: [
           {
             loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+            },
           },
         ],
       },
