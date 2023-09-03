@@ -3,8 +3,9 @@ import { MDCRipple }    from '@material/ripple'
 import { MDCSnackbar }  from '@material/snackbar'
 import { MDCTextField } from '@material/textfield'
 
-import { generatePassword } from 'lesspass'
-import { createHmac }       from 'lesspass-fingerprint'
+import { calcEntropy }    from 'lesspass-entropy'
+import { renderPassword } from 'lesspass-render-password'
+import { createHmac }     from 'lesspass-fingerprint'
 
 import '@material/chips/dist/mdc.chips.min.css'
 import '@material/ripple/dist/mdc.ripple.min.css'
@@ -85,7 +86,6 @@ const letterElements = [letter1Element, letter2Element, letter3Element, letter4E
 const charsetsChipSet  = new MDCChipSet(charsetsElement),
       algorithmChipSet = new MDCChipSet(algoElement)
 
-
 // Restore options
 
 enum Charset {
@@ -137,10 +137,8 @@ if (options.charsets & Charset.Symbols)
 
 if (options.aes === 256)
   algorithmChipSet.chips[0].selected = true
-else if (options.aes === 384)
-  algorithmChipSet.chips[1].selected = true
 else
-  algorithmChipSet.chips[2].selected = true
+  algorithmChipSet.chips[1].selected = true
 
 lengthElement.valueAsNumber = options.length
 counterElement.valueAsNumber = options.counter
@@ -155,7 +153,7 @@ for (const input of [websiteElement, usernameElement, passwordElement, lengthEle
 let generatedPasswordRaceToken = 0,
     generatedPassword = ''
 
-function renderPassword() {
+function updatePassword() {
   if (websiteElement.value.length === 0
     || usernameElement.value.length === 0
     || passwordElement.value.length === 0)
@@ -163,21 +161,28 @@ function renderPassword() {
 
   const token = ++generatedPasswordRaceToken
 
-  generatePassword(
-    {
-      site: websiteElement.value,
-      login: usernameElement.value,
+  calcEntropy({
+    site: websiteElement.value,
+    login: usernameElement.value,
+    options: {
       counter: options.counter,
+    },
+    crypto: {
+      iterations: +iterElement.value,
+      keylen: 32,
+      digest: 'sha' + options.aes as "sha256" | "sha512",
+    },
+  }, passwordElement.value).then(entropy => {
+    if (token !== generatedPasswordRaceToken)
+      return
+
+    const password = renderPassword(entropy, {
       length: options.length,
       lowercase: (options.charsets & Charset.Lower) !== 0,
       uppercase: (options.charsets & Charset.Upper) !== 0,
       digits: (options.charsets & Charset.Numeric) !== 0,
       symbols: (options.charsets & Charset.Symbols) !== 0,
-    },
-    passwordElement.value,
-  ).then(password => {
-    if (token !== generatedPasswordRaceToken)
-      return
+    })
 
     generatedPassword = password
     resultElement.textContent = password
@@ -188,7 +193,7 @@ function renderPassword() {
 }
 
 websiteElement.addEventListener('input', function() {
-  renderPassword()
+  updatePassword()
 
   if (this.value.length === 0)
     return part1Element.classList.add('out')
@@ -197,7 +202,7 @@ websiteElement.addEventListener('input', function() {
 })
 
 usernameElement.addEventListener('input', function() {
-  renderPassword()
+  updatePassword()
 
   if (this.value.length === 0)
     return part3Element.classList.add('out')
@@ -208,7 +213,7 @@ usernameElement.addEventListener('input', function() {
 let masterPasswordRaceToken = 0
 
 passwordElement.addEventListener('input', function() {
-  renderPassword()
+  updatePassword()
 
   if (this.value.length === 0) {
     part1Element.style.setProperty('--color', '')
@@ -226,7 +231,7 @@ passwordElement.addEventListener('input', function() {
 
   const token = ++masterPasswordRaceToken
 
-  createHmac('sha256', this.value)
+  createHmac('sha' + options.aes, this.value)
     .then(fingerprint => {
       if (token !== masterPasswordRaceToken)
         return
@@ -318,7 +323,7 @@ lengthElement.addEventListener('input', function() {
 
   options.length = this.valueAsNumber
   saveOptions()
-  renderPassword()
+  updatePassword()
 })
 
 setUpDefaultBlurListener(counterElement, 1)
@@ -329,7 +334,7 @@ counterElement.addEventListener('input', function() {
 
   onCounterUpdated(options.counter = this.valueAsNumber)
   saveOptions()
-  renderPassword()
+  updatePassword()
 })
 
 setUpDefaultBlurListener(iterElement, 100_000)
@@ -340,11 +345,11 @@ iterElement.addEventListener('input', function() {
 
   options.iterations = this.valueAsNumber
   saveOptions()
-  renderPassword()
+  updatePassword()
 })
 
 charsetsChipSet.listen('MDCChip:selection', function() {
-  let charset: Charset = 0
+  let charset = 0 as Charset
 
   if (charsetsChipSet.chips[0].selected)
     charset |= Charset.Lower
@@ -366,15 +371,14 @@ charsetsChipSet.listen('MDCChip:selection', function() {
 
   onCharsetUpdated(options.charsets = charset)
   saveOptions()
-  renderPassword()
+  updatePassword()
 })
 
 algorithmChipSet.listen('MDCChip:selection', function() {
-  options.aes = algorithmChipSet.chips[0].selected ? 256
-              : algorithmChipSet.chips[1].selected ? 384 : 512
+  options.aes = algorithmChipSet.chips[0].selected ? 256 : 512
 
   saveOptions()
-  renderPassword()
+  updatePassword()
 })
 
 onCharsetUpdated(options.charsets)
@@ -501,7 +505,7 @@ forwardVisualFocus(usernameElement, part3Element)
 forwardVisualFocus(passwordElement, part2Element)
 
 
-// Make sure focusing an element via Alt opens the relevant section
+// Make sure focusing an element via Tab opens the relevant section
 // ============================================================================
 
 function focusOpensSection(paperElement: Element, ...focusElements: HTMLElement[]) {
