@@ -480,15 +480,9 @@ const textCopiedSnackbar = new MDCSnackbar(document.getElementById('copy-snackba
 textCopiedSnackbar.closeOnEscape = true
 
 resultElement.addEventListener('click', function() {
-  document.execCommand('copy')
-  textCopiedSnackbar.open()
-})
-
-resultElement.addEventListener('copy', function(e) {
-  e.preventDefault()
-
-  if (e.clipboardData !== null)
-    e.clipboardData.setData('text/plain', generatedPassword)
+  navigator.clipboard.writeText(generatedPassword).then(
+    () => textCopiedSnackbar.open(),
+  )
 })
 
 
