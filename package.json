@@ -26,7 +26,7 @@
     "copy-webpack-plugin": "^5.0.4",
     "css-loader": "^3.0.0",
     "file-loader": "^4.0.0",
-    "gh-pages": "^3.1.0",
+    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^3.2.0",
     "lesspass-entropy": "^9.1.9",
     "lesspass-render-password": "^9.1.9",
