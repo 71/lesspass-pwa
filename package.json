@@ -32,7 +32,7 @@
     "lesspass-render-password": "^9.1.9",
     "mini-css-extract-plugin": "^0.7.0",
     "open-color": "^1.7.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.3",
     "pug-loader": "^2.4.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
