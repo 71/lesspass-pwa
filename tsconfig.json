@@ -3,6 +3,7 @@
     "strict": true,
     "target": "es2018",
     "module": "commonjs",
-    "lib": ["dom"]
+    "lib": ["dom", "es2015"],
+    "types": []
   }
 }

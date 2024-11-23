@@ -88,7 +88,8 @@ const charsetsChipSet  = new MDCChipSet(charsetsElement),
 
 // Restore options
 
-enum Charset {
+const enum Charset {
+  None = 0,
   Upper = 1,
   Lower = 2,
   Numeric = 4,
