@@ -63,6 +63,8 @@ input[type='number']::-webkit-outer-spin-button {
 }
 .toggle-password {
   pointer-events: all !important;
+}
+#inputs .toggle-password {
   opacity: 0.5;
 }
 .toggle-password .show {
@@ -246,11 +248,19 @@ section .opener svg path {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  flex-direction: row-reverse;
 }
 .result-view .result-container span {
   font: 700 26px 'Ubuntu Mono', monospace;
   z-index: 1;
   color: #fff;
   text-shadow: #999 1px 1px;
+}
+.result-view .result-container .toggle-password {
+  z-index: 1;
+  fill: #fff;
+  cursor: pointer;
+  padding-left: 12px;
+  margin-top: 2px;
 }
 
