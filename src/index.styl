@@ -30,7 +30,9 @@ input[type='number']
 
 .toggle-password
   pointer-events: all!important
-  opacity: .5
+
+  #inputs &
+    opacity: .5
 
   .show
     display: initial
@@ -220,9 +222,17 @@ section
     justify-content: center
     align-items: center
     cursor: pointer
+    flex-direction: row-reverse
 
     span
       font: 700 26px 'Ubuntu Mono', monospace
       z-index: 1
       color: white
       text-shadow: #999 1px 1px
+
+    .toggle-password
+      z-index: 1
+      fill: white
+      cursor: pointer
+      padding-left: 12px
+      margin-top: 2px

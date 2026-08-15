@@ -77,7 +77,8 @@ const part1Element = document.getElementById('part-1') as HTMLElement,
       letter2Element = document.getElementById('letter-2') as HTMLSpanElement,
       letter3Element = document.getElementById('letter-3') as HTMLSpanElement,
       letter4Element = document.getElementById('letter-4') as HTMLSpanElement,
-      resultElement = document.getElementById('generated-password') as HTMLSpanElement
+      resultElement = document.getElementById('generated-password') as HTMLSpanElement,
+      toggleResultElement = document.querySelector('#result .toggle-password') as HTMLElement
 
 const letterElements = [letter1Element, letter2Element, letter3Element, letter4Element]
 
@@ -157,8 +158,11 @@ let generatedPasswordRaceToken = 0,
 function updatePassword() {
   if (websiteElement.value.length === 0
     || usernameElement.value.length === 0
-    || passwordElement.value.length === 0)
-    return resultElement.textContent = ''
+    || passwordElement.value.length === 0) {
+    resultElement.textContent = ''
+    toggleResultElement.style.display = 'none'
+    return
+  }
 
   const token = ++generatedPasswordRaceToken
 
@@ -186,10 +190,13 @@ function updatePassword() {
     })
 
     generatedPassword = password
-    resultElement.textContent = password
+    resultElement.textContent = toggleResultElement.classList.contains('is-clear')
+        ? password
+        : '*'.repeat(password.length)
+    toggleResultElement.style.display = 'initial'
 
     part1Element.parentElement!.style.setProperty(
-      '--box-width', `${resultElement.clientWidth + 16}px`)
+      '--box-width', `${resultElement.clientWidth + toggleResultElement.clientWidth + 28}px`)
   })
 }
 
@@ -448,18 +455,19 @@ for (const button of document.getElementsByClassName('toggle-password') as any a
   MDCRipple.attachTo(button).unbounded = true
 
   button.addEventListener('click', function() {
-    const input = this.nextElementSibling as HTMLInputElement
+    const input = this.nextElementSibling as HTMLInputElement | HTMLSpanElement
+    const wasClear = this.classList.contains('is-clear')
 
-    if (input.type === 'password') {
-      input.type = 'text'
-      this.classList.add('is-clear')
+    if (this === toggleResultElement) {
+      resultElement.textContent = wasClear ? '*'.repeat(generatedPassword.length) : generatedPassword
     } else {
-      input.type = 'password'
-      this.classList.remove('is-clear')
+      (input as HTMLInputElement).type = wasClear ? 'password' : 'text'
     }
+
+    input.classList.toggle('is-clear', !wasClear)
+    this.classList.toggle('is-clear', !wasClear)
   })
 }
-
 
 // Set up expansion panel openers
 // ============================================================================

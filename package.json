@@ -1,6 +1,6 @@
 {
   "name": "lesspass-pwa",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "main": "index.js",
   "author": {
     "name": "Grégoire Geis",
@@ -29,6 +29,7 @@
     "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^3.2.0",
     "lesspass-entropy": "^9.1.9",
+    "lesspass-fingerprint": "^9.1.9",
     "lesspass-render-password": "^9.1.9",
     "mini-css-extract-plugin": "^0.7.0",
     "open-color": "^1.7.0",
