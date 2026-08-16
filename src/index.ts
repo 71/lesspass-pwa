@@ -58,6 +58,38 @@ const palettes = [
   ['#0b132b', '#1c2541', '#3a506b', '#5bc0be', '#6fffe9'],
 ]
 
+// A few palette colors are too light or too dark to use as a UI accent
+// (outline, caret, label text) even though they work fine as tile
+// backgrounds. Hardcode a higher-contrast replacement for those.
+const accentOverrides: Record<string, string> = {
+  '#fff1e9': '#e8a37e',
+  '#ffd5d5': '#e88a8a',
+  '#dfddc7': '#a39d6d',
+  '#211717': '#5a4040',
+  '#f5f5f5': '#9e9e9e',
+  '#c6f1e7': '#4fae9a',
+  '#f0fff3': '#5fae77',
+  '#d8e9f0': '#6fa8c2',
+  '#f5f0e3': '#b8ab7e',
+  '#011627': '#3a5570',
+  '#fafafa': '#9e9e9e',
+  '#f1faee': '#8bab84',
+  '#f7fff7': '#5fae77',
+  '#ffe66d': '#c2a83f',
+  '#e4fde1': '#5fae77',
+  '#e0fbfc': '#6fb4b8',
+  '#f3e9d2': '#b8a675',
+  '#dcdcdd': '#9e9e9e',
+  '#003049': '#3a6d90',
+  '#eae2b7': '#b8a969',
+  '#0b132b': '#3a4570',
+  '#1c2541': '#48568c',
+}
+
+function toAccentColor(hex: string): string {
+  return accentOverrides[hex] ?? hex
+}
+
 
 // Find all needed elements
 
@@ -232,6 +264,12 @@ passwordElement.addEventListener('input', function() {
     letter3Element.style.setProperty('--color', '')
     letter4Element.style.setProperty('--color', '')
 
+    // Falls back to the neutral --color-N default declared in index.styl.
+    const rootStyle = document.documentElement.style
+
+    for (let i = 1; i <= 7; i++)
+      rootStyle.removeProperty(`--color-${i}`)
+
     return part2Element.classList.add('out')
   }
 
@@ -262,6 +300,11 @@ passwordElement.addEventListener('input', function() {
       letter2Element.style.setProperty('--color', getColor(5))
       letter3Element.style.setProperty('--color', getColor(6))
       letter4Element.style.setProperty('--color', getColor(7))
+
+      const rootStyle = document.documentElement.style
+
+      for (let i = 1; i <= 7; i++)
+        rootStyle.setProperty(`--color-${i}`, toAccentColor(getColor(i)))
     })
 })
 

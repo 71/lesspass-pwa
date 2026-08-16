@@ -1,7 +1,89 @@
+html
+  // Neutral default accent (no password typed yet, so no dynamic
+  // per-field color is set).
+  --mdc-theme-primary: #616161
+
+  for i in (1..7)
+    --color-{i}: var(--mdc-theme-primary)
+
 body
   margin: 0
   display: flex
   justify-content: center
+  background: #fff
+
+// MDC hardcodes the focused label color instead of reading
+// --mdc-theme-primary; fix that.
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label
+  color: var(--mdc-theme-primary) !important
+
+@media (prefers-color-scheme: dark)
+  html
+    --mdc-theme-primary: #bdbdbd
+    --mdc-theme-secondary: #03dac6
+    --mdc-theme-surface: #2a2a2a
+    --mdc-theme-on-surface: #fff
+
+  body
+    background: #000
+    color: #fff
+
+  .paper
+    border-color: #383838 !important
+    background: #121212
+
+  .opener h3
+    color: #fff !important
+
+  .opener svg path
+    fill: #a0a0a0 !important
+
+  .mdc-floating-label
+    color: rgba(255, 255, 255, .8) !important
+
+  .mdc-text-field__input
+    color: #fff !important
+
+  .mdc-text-field__icon
+    color: rgba(255, 255, 255, .54) !important
+
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing
+    border-color: rgba(255, 255, 255, .38) !important
+
+  .mdc-text-field--focused .mdc-notched-outline__leading,
+  .mdc-text-field--focused .mdc-notched-outline__notch,
+  .mdc-text-field--focused .mdc-notched-outline__trailing
+    border-color: var(--mdc-theme-primary) !important
+
+  .mdc-text-field--disabled
+    background-color: #000 !important
+
+    .mdc-text-field__input
+      color: rgba(255, 255, 255, .37) !important
+      border-bottom-color: rgba(255, 255, 255, .06) !important
+
+    .mdc-floating-label
+      color: rgba(255, 255, 255, .37) !important
+
+  .mdc-chip
+    background-color: #383838 !important
+    color: #fff !important
+
+  .mdc-chip__icon--leading,
+  .mdc-chip__icon--trailing
+    color: rgba(255, 255, 255, .54) !important
+
+  .mdc-chip-set--filter .mdc-chip__checkmark-path
+    stroke: #fff !important
+
+  .mdc-chip-set--choice .mdc-chip--selected
+    box-shadow: inset 0 0 0 1px var(--mdc-theme-primary) !important
+
+  .result-view
+    --placeholder-color: #2e2e2e
+    --result-shadow-color: rgba(255, 255, 255, .25)
 
 *
   box-sizing: border-box
@@ -131,11 +213,11 @@ section
 
   b
     position: absolute
-    color: var(--color, $default-color)
+    color: var(--color, var(--placeholder-color, $default-color))
 
   .letter
     font: 500 72px Ubuntu, sans-serif
-    text-shadow: $shadow-color 1px 2px
+    text-shadow: var(--result-shadow-color, $shadow-color) 1px 2px
     transition: all .3s ease-out
     z-index: 1
 
@@ -180,10 +262,10 @@ section
     position: absolute
     opacity: .9
     transition: all .3s ease-in
-    box-shadow: $shadow-color 1px 2px
+    box-shadow: var(--result-shadow-color, $shadow-color) 1px 2px
     height: var(--box-height)
     width: calc(var(--box-width) / 3)
-    background: var(--color, $default-color)
+    background: var(--color, var(--placeholder-color, $default-color))
     transition: all .3s ease-in
 
     &.focused, &:hover
